@@ -18,9 +18,9 @@ class Solution {
      * @return ListNode
      */
     function addTwoNumbers($l1, $l2) {
-        $l1 = $this->filterListNode($l1);
-        $l2 = $this->filterListNode($l2);
-        $total = $l1+$l2;
+        $num1 = $this->filterListNode($l1);
+        $num2 = $this->filterListNode($l2);
+        $total = $num1+$num2;
         $total = (string)$total;
         $result = array();
         for($i=strlen($total)-1;$i>=0;$i--){
