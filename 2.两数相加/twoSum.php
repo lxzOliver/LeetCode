@@ -22,10 +22,12 @@ class Solution {
         $l2 = $this->filterListNode($l2);
         $total = $l1+$l2;
         $total = (string)$total;
+        $result = array();
         for($i=strlen($total)-1;$i>=0;$i--){
             $result[] = $total[$i];
         }
-        return $result;
+        $listNode = new ListNode($result[0]);
+        return $this->createListNode($result,1,$listNode);
     }
 
     function filterListNode($listNode){
@@ -37,6 +39,16 @@ class Solution {
         }
         return intval(strrev($num));
     }
+
+    function createListNode($result,$i,$listNode)
+    {
+        if (isset($result[$i])){
+            $listNode->next = new ListNode($result[$i]);
+            $i++;
+            $listNode->next = $this->createListNode($result,$i,$listNode->next);
+        }
+        return $listNode;
+    }
 }
 
 class ListNode {
@@ -47,14 +59,18 @@ class ListNode {
 
 $arr1 = [2,4,3];
 $arr2 = [5,6,4];
-$l1 = new ListNode(2);
-$l1->next = new ListNode(4);
-$l1->next->next = new ListNode(3);
 
-$l2 = new ListNode(5);
-$l2->next = new ListNode(6);
-$l2->next->next = new ListNode(4);
 
 $solution = new Solution();
+$l1 = new ListNode($arr1[0]);
+$l1 = $solution->createListNode($arr1,1,$l1);
+$l2 = new ListNode($arr2[0]);
+$l2 = $solution->createListNode($arr2,1,$l2);
 $result = $solution->addTwoNumbers($l1,$l2);
-var_dump($result);
+$num[] = $result->val;
+$next = $result->next;
+while($next){
+    $num[] = $next->val;
+    $next = $next->next;
+}
+var_dump($num);
