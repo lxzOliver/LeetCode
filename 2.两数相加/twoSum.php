@@ -30,6 +30,11 @@ class Solution {
         return $this->createListNode($result,1,$listNode);
     }
 
+    /**
+     * 处理计算链表值
+     * @param $listNode
+     * @return int
+     */
     function filterListNode($listNode){
         $num = $listNode->val;
         $next = $listNode->next;
@@ -40,6 +45,13 @@ class Solution {
         return intval(strrev($num));
     }
 
+    /**
+     * 创建链表
+     * @param $result
+     * @param $i
+     * @param $listNode
+     * @return mixed
+     */
     function createListNode($result,$i,$listNode)
     {
         if (isset($result[$i])){
