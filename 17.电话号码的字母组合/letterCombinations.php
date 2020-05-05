@@ -1,5 +1,5 @@
 <?php
-// 给定一个仅包含数字 2-9 的字符串，返回所有它能表示的字母组合。
+// 给定一个仅包含数字 2-9 的字符串，返回所有它能表示的字母组合。
 
 // 给出数字到字母的映射如下（与电话按键相同）。注意 1 不对应任何字母。
 
@@ -47,20 +47,29 @@ class Solution {
             if($j>=count($arr)){
                 return $data;
             }
-            $z=0;
-            foreach($arr[$i] as $k1=>$v1){
-                foreach($arr[$j] as $k2=>$v2){
-                    $data[$z]=$v1.$v2;
-                    $z++;
+            if(!$data){
+                foreach($arr[$i] as $k1=>$v1){
+                    foreach($arr[$j] as $k2=>$v2){
+                        $data[]=$v1.$v2;
+                    }
                 }
+                $i++;
+                return $this->recursiveArray($arr,$i,$data);
+            }else{
+                $new = [];
+                foreach($data as $k1=>$v1){
+                    foreach($arr[$j] as $k2=>$v2){
+                        $new[]=$v1.$v2;
+                    }
+                }
+                $data = $new;
+                $i++;
+                return $this->recursiveArray($arr,$i,$data);
             }
-            $i++;
-            return $this->recursiveArray($arr,$i,$data);
         }
-
     }
 }
-$digits = "23";
+$digits = "239";
 $solution = new Solution();
 $combine = $solution->letterCombinations($digits);
 var_dump($combine);
